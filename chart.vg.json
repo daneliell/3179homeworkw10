@@ -1,0 +1,88 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json", 
+    "title": 
+        { "text": "Largest Gold Reserves of Countries over Time" }, 
+    "width": 550,
+    "height": 300,
+    "data": { 
+        "url": "https://raw.githubusercontent.com/daneliell/3179homeworkw10/main/gold_reserves_time_pivoted.csv"
+        },
+    "params": [ 
+        { 
+            "name": "Country_selection", 
+            "bind": { 
+                "input": "select", 
+                "options": [ 
+                    null, 
+                    "Switzerland", 
+                    "India", 
+                    "Hong Kong", 
+                    "Brazil", 
+                    "Germany" 
+                ], 
+                "labels":[
+                    "Show All", 
+                    "Switzerland", 
+                    "India", 
+                    "Hong Kong", 
+                    "Brazil", 
+                    "Germany" 
+                ], 
+                "name": "Country Selection: " 
+            } 
+        } 
+    ],
+    "transform": [
+        {"filter": "datum.Value > 0"},
+        {"calculate": "datum.Value", "as": "Gold Reserves in USD"},
+        {"filter": "Country_selection == null || datum.Country == Country_selection"}
+    ],
+    "encoding": {
+        "x": { 
+            "field": "Year", 
+            "type": "nominal"
+        },
+        "y": { 
+            "field": "Gold Reserves in USD", 
+            "type": "quantitative",
+            "axis": {
+                "format": ".1e"
+            }
+        }
+    },
+    "layer": [
+        {
+            "mark": {"type": "line", "strokeWidth": 2.5},
+            "encoding": {
+                "color": {
+                    "field": "Country", 
+                    "type": "nominal",
+                    "legend": null
+                },
+                "tooltip": [
+                    {"field": "Country", "type": "nominal"},
+                    {"field": "Year", "type": "nominal"},
+                    {"field": "Gold Reserves in USD", "type": "quantitative", "format": ".1e"}
+                ]
+            }
+        },
+        {
+            "mark": {
+                "type": "text", 
+                "align": "left", 
+                "dx": 5
+            },
+            "encoding": {
+                "text": {"field": "Country", "type": "nominal"},
+                "color": {"value": "black"},
+                "opacity": {
+                    "condition": {
+                        "test": "datum['Country'] == 'Brazil' && datum['Year'] == '2020' || datum['Country'] == 'Switzerland' && datum['Year'] == '2020' || datum['Country'] == 'Germany' && datum['Year'] == '2020' || datum['Country'] == 'Hong Kong' && datum['Year'] == '2020' || datum['Country'] == 'India' && datum['Year'] == '2020'",
+                        "value": 1
+                    },
+                    "value": 0
+                }
+            }
+        }
+    ]
+}

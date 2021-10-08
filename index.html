@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+    
+<head>
+    <meta charset="UTF-8"> 
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"> 
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://unpkg.com/purecss@2.0.6/build/pure-min.css" integrity="sha384-Uu6IeWbM+gzNVXJcM9XV3SohHtmWE+3VGi496jvgX1jyvDTXfdK+rfZc8C1Aehk5" crossorigin="anonymous">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://cdn.jsdelivr.net/npm/vega@5.20.2"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-lite@5.1.0"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-embed@6.17.0"></script>
+    
+    <script>
+        var vg_1 = "homework.vg.json"; 
+
+        vegaEmbed("#map", vg_1).then(function(result) { 
+            // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view 
+        }).catch(console.error);
+
+        var vg_2 = "chart.vg.json"; 
+
+        vegaEmbed("#chart", vg_2).then(function(result) { 
+            // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view 
+        }).catch(console.error);
+    </script>
+
+    <style>
+        body {
+            background-color: #F5F5F5;
+        }
+        #map {
+            text-align: center;
+            display: block;
+            padding: 20px;
+        }
+        #chart {
+            padding: 30px;
+        }
+        .text {
+            padding: 0px 0px 50px 50px;
+        }
+    </style>
+    
+    <title>Gold Reserves of Countries Worldwide</title> 
+</head> 
+
+<body> 
+    <h1 style="text-align: center;">Gold Reserves of Countries Worldwide</h1> 
+    <div id="map"></div>
+    <div class="pure-g">
+        <div class="pure-u-2-5">
+            <div class="text">
+                <h1>Largest Gold Reserves Worldwide</h1>
+                <p>Gold is an important factor in world economics. Examining the prices of gold
+                    across different countries is a good estimate of their economic status.
+                </p>
+                <p>
+                    Throughout the years, gold reserves of countries Worldwide have been steadily
+                    rising in wealthy countries. The chart on the right shows the prices of the 
+                    top five countries with the largest gold reserves in USD from 2010 to 2020.
+                </p>
+                <p>
+                    Countries can be filtered by using the dropdown selection box below the chart.
+                </p>
+            </div>
+        </div>
+        <div class="pure-u-3-5">
+            <div id="chart"></div>
+        </div>
+    </div>
+</body>
+
+</html>
